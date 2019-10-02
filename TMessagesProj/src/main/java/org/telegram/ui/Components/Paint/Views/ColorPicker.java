@@ -90,12 +90,9 @@ public class ColorPicker extends FrameLayout {
         settingsButton.setScaleType(ImageView.ScaleType.CENTER);
         settingsButton.setImageResource(R.drawable.photo_paint_brush);
         addView(settingsButton, LayoutHelper.createFrame(60, 52));
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null) {
-                    delegate.onSettingsPressed();
-                }
+        settingsButton.setOnClickListener(v -> {
+            if (delegate != null) {
+                delegate.onSettingsPressed();
             }
         });
 
@@ -103,12 +100,9 @@ public class ColorPicker extends FrameLayout {
         undoButton.setScaleType(ImageView.ScaleType.CENTER);
         undoButton.setImageResource(R.drawable.photo_undo);
         addView(undoButton, LayoutHelper.createFrame(60, 52));
-        undoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (delegate != null) {
-                    delegate.onUndoPressed();
-                }
+        undoButton.setOnClickListener(v -> {
+            if (delegate != null) {
+                delegate.onUndoPressed();
             }
         });
 

@@ -35,6 +35,14 @@ dependencies {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/rohyme/AndroidStudioProjects/Mine/forks/Telegram/Untitled')
+            storePassword '0153435148'
+            keyAlias = 'rohym3'
+            keyPassword '0153435148'
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
 
@@ -63,57 +71,21 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    signingConfigs {
-        debug {
-            storeFile file("config/release.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-
-        release {
-            storeFile file("config/release.keystore")
-            storePassword RELEASE_STORE_PASSWORD
-            keyAlias RELEASE_KEY_ALIAS
-            keyPassword RELEASE_KEY_PASSWORD
-        }
-    }
 
     buildTypes {
         debug {
             debuggable true
             jniDebuggable true
-            signingConfig signingConfigs.debug
-            applicationIdSuffix ".beta"
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
-        debugMultidex {
-            initWith debug
-            minifyEnabled false
-            multiDexEnabled true
-            dependencies {
-                implementation 'com.android.support:multidex:1.0.3'
-            }
-            manifestPlaceholders = [applicationClassName: "MultiDexApplicationLoader"]
-        }
 
-        HA {
-            debuggable false
-            jniDebuggable false
-            signingConfig signingConfigs.debug
-            applicationIdSuffix ".beta"
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
 
         release {
-            debuggable false
-            jniDebuggable false
-            signingConfig signingConfigs.release
-            minifyEnabled true
-            shrinkResources false
+            debuggable true
+            jniDebuggable true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -122,17 +94,9 @@ android {
         manifest.srcFile 'config/debug/AndroidManifest.xml'
     }
 
-    sourceSets.debugMultidex {
-        manifest.srcFile 'config/debug/AndroidManifest.xml'
-        java.srcDirs = ['src/multidex/java']
-    }
-
-    sourceSets.HA {
-        manifest.srcFile 'config/debug/AndroidManifest.xml'
-    }
 
     sourceSets.release {
-        manifest.srcFile 'config/release/AndroidManifest.xml'
+        manifest.srcFile 'config/debug/AndroidManifest.xml'
     }
 
     flavorDimensions "minApi"
